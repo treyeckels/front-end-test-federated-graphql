@@ -7,6 +7,7 @@ const typeDefs = gql`
     lastName: String
     email: String
     favorites: [String]
+    favoritesData: [Pet]
   }
 
   type Pet {

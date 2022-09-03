@@ -29,6 +29,23 @@ const resolvers = {
     },
   },
 
+  User: {
+    favoritesData: async (parent, args, context) => {
+      const favs = parent.favorites;
+      console.log(favs);
+      // return [];
+      if (!favs.length) {
+        return [];
+      }
+      const promises = favs.map((id) => client.animal.show(id));
+      const responses = await Promise.all(promises);
+      const data = responses.map((resp) => {
+        return resp.data.animal;
+      });
+      return data;
+    },
+  },
+
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);
