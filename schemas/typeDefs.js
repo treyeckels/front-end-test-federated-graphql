@@ -8,13 +8,33 @@ const typeDefs = gql`
     email: String
   }
 
-  type Book {
-    bookId: ID!
-    authors: [String]
+  type Pet {
+    id: ID!
+    organization_id: [String]
+    url: String
+    type: String
+    species: String
+    breeds: Breed
+    age: String
+    gender: String
+    name: String
     description: String
-    image: String
-    link: String
-    title: String!
+    photos: [Photo]
+    status: String
+  }
+
+  type Photo {
+    small: String
+    medium: String
+    large: String
+    full: String
+  }
+
+  type Breed {
+    primary: String
+    secondary: String
+    mixed: Boolean
+    unknown: Boolean
   }
 
   type Auth {
@@ -22,17 +42,9 @@ const typeDefs = gql`
     user: User
   }
 
-  input BookInput {
-    authors: [String]
-    description: String!
-    bookId: String!
-    image: String
-    link: String
-    title: String!
-  }
-
   type Query {
     me: User
+    latestPets: [Pet]
   }
 
   type Mutation {
@@ -43,8 +55,6 @@ const typeDefs = gql`
       email: String!
       password: String!
     ): Auth
-    saveBook(bookData: BookInput!): User
-    removeBook(bookId: ID!): User
   }
 `;
 
