@@ -14,10 +14,10 @@ const server = new ApolloServer({
   subscriptions: false,
 });
 
-await server.start();
+server.start().then(() => {
+  server.applyMiddleware({ app });
 
-server.applyMiddleware({ app });
-
-app.listen({ port }, () =>
-  console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`)
-);
+  app.listen({ port }, () =>
+    console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`)
+  );
+});
