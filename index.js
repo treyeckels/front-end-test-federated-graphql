@@ -2,7 +2,7 @@ const { ApolloGateway } = require("@apollo/gateway");
 const { ApolloServer } = require("apollo-server-express");
 const express = require("express");
 
-const port = 4000;
+const port = process.env.PORT || 4000;
 const app = express();
 
 const gateway = new ApolloGateway({
