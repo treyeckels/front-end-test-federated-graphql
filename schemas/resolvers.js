@@ -23,7 +23,9 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     latestPets: async (parent, args, context) => {
-      const results = await client.animal.search();
+      const results = await client.animal.search({
+        location: "22015",
+      });
       console.log(results);
       return results.data.animals;
     },
