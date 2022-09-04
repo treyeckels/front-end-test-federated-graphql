@@ -71,6 +71,28 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    addFavorite: async (parent, { id }, context) => {
+      console.log(context.user);
+      if (!context.user) {
+        throw new AuthenticationError("Not logged in");
+      }
+      return User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $push: { favorites: id } },
+        { new: true }
+      );
+    },
+    removeFavorite: async (parent, { id }, context) => {
+      console.log(context.user);
+      if (!context.user) {
+        throw new AuthenticationError("Not logged in");
+      }
+      return User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $pull: { favorites: id } },
+        { new: true }
+      );
+    },
   },
 };
 

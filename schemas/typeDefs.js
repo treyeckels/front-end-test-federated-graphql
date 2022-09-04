@@ -57,6 +57,8 @@ const typeDefs = gql`
       email: String!
       password: String!
     ): Auth
+    addFavorite(id: String!): User
+    removeFavorite(id: String!): User
   }
 `;
 
